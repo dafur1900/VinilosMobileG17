@@ -1,6 +1,7 @@
 # VinilosMobileG17
 
 Proyecto Vinilos - Equipo 17
+
 Integrantes
 
 Estudiantes
