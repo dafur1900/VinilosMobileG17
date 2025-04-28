@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import co.vinilos.melomanos.R
 import co.vinilos.melomanos.databinding.ArtistItemBinding
-import co.vinilos.melomanos.data.models.Artist
+import co.vinilos.melomanos.models.Artist
 
 class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
 

@@ -7,8 +7,8 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import co.vinilos.melomanos.data.models.Album
-import co.vinilos.melomanos.data.models.Artist
+import co.vinilos.melomanos.models.Album
+import co.vinilos.melomanos.models.Artist
 import co.vinilos.melomanos.data.models.Comment
 import co.vinilos.melomanos.data.models.Track
 import org.json.JSONArray

@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import co.vinilos.melomanos.data.models.Artist
+import co.vinilos.melomanos.models.Artist
 import co.vinilos.melomanos.data.repositories.BandRepository
 import co.vinilos.melomanos.data.repositories.MusicianRepository
 

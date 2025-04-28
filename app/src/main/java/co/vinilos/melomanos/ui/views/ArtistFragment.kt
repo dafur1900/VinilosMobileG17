@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.vinilos.melomanos.databinding.ArtistFragmentBinding
-import co.vinilos.melomanos.data.models.Artist
+import co.vinilos.melomanos.models.Artist
 import co.vinilos.melomanos.ui.viewmodels.ArtistViewModel
 import co.vinilos.melomanos.ui.views.adapters.ArtistAdapter
 
