@@ -4,6 +4,9 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
@@ -13,6 +16,9 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.Arrays;
+import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 public class HU002DetalleAlbumTest {
@@ -67,6 +73,62 @@ public class HU002DetalleAlbumTest {
         onView(withId(R.id.detail_release_date)) // Se debe reemplazar con el ID real del TextView de la fecha de lanzamiento en el detalle
                 .check(matches(withText(primerFechaLanzamiento)));
 
+
+    }
+
+    @Test
+    public void alSeleccionarUnAlbumSeMuestraLaListaDeCanciones() {
+
+        // Datos del primer álbum y su lista de canciones esperada (reemplaza con datos reales)
+        String primerAlbumNombre = "Nombre del Álbum 1";
+        List<String> primerasCanciones = Arrays.asList("Canción 1", "Canción 2", "Canción 3");
+
+        // Simula el clic en el primer elemento de la lista de álbumes
+        onView(withId(R.id.album_list)) // Se debe reemplazar con el ID real
+                .perform(actionOnItemAtPosition(0, click()));
+
+        // Asumiendo que la lista de canciones se muestra en un RecyclerView con el ID "song_list"
+        // en la pantalla de detalle.
+
+        // Verifica que el RecyclerView de la lista de canciones esté presente
+        onView(withId(R.id.song_list)) // Reemplaza con el ID real de tu RecyclerView de canciones
+                .check(matches(isDisplayed()));
+
+        // Verificamos que cada canción esperada esté presente en la lista
+        for (int i = 0; i < primerasCanciones.size(); i++) {
+            onView(withId(R.id.song_list)) // Reemplaza con el ID real de tu RecyclerView de canciones
+                    .perform(scrollToPosition(i)) // Asegura que el elemento esté visible
+                    .check(matches(hasDescendant(withText(primerasCanciones.get(i)))));
+        }
+    }
+
+    @Test
+    public void alSeleccionarUnAlbumSeMuestraUnBotonParaVolverAlCatalogo() {
+
+        // Simula el clic en el primer elemento de la lista de álbumes
+        onView(withId(R.id.album_list)) // Reemplaza con el ID
+                .perform(actionOnItemAtPosition(0, click()));
+
+        // Asumiendo que hay un Button en la pantalla de detalle con el ID "button_volver_catalogo"
+
+        // Verifica que el botón esté presente y visible
+        onView(withId(R.id.button_volver_catalogo)) // Se debe reemplazar con el ID real del botón "Volver"
+                .check(matches(isDisplayed()))
+                .check(matches(withText("Volver al Catálogo"))); // Se debe reemplazar con el texto real del botón
+    }
+
+    @Test
+    public void alHacerClickEnElBotonVolverSeNavegaAlCatalogo() {
+
+        // Simula el clic en el primer elemento de la lista de álbumes
+        onView(withId(R.id.album_list)) // Se debe reemplazar con el ID real de tu RecyclerView de álbumes
+                .perform(actionOnItemAtPosition(0, click()));
+
+        // Asumiendo que hay un Button en la pantalla de detalle con el ID "button_volver_catalogo"
+
+        // Simula el clic en el botón "Volver al Catálogo"
+        onView(withId(R.id.button_volver_catalogo)) // Se debe reemplazar con el ID real del botón "Volver"
+                .perform(click());
 
     }
 }
