@@ -107,4 +107,37 @@ public class HU004DetalleArtistaTest {
 
     }
 
+    @Test
+    public void alNavegarADetalleSeMuestraBotonVolver() {
+        // Simula el clic en el primer elemento de la lista de artistas para navegar al detalle
+        onView(withId(R.id.artist_list)) // Se debe reemplazar con el ID real de artistas
+                .perform(actionOnItemAtPosition(0, click()));
+
+        // Asumiendo que hay un Button en la parte inferior con el ID "button_volver_artistas"
+        // y el texto "VOLVER".
+
+        // Verificamos que el botón esté presente y visible con el texto esperado
+        onView(withId(R.id.button_volver_artistas)) // Se debe reemplazar con el ID real del botón "Volver"
+                .check(matches(isDisplayed()))
+                .check(matches(withText("VOLVER"))); // Se debe reemplazar "VOLVER" si el texto es diferente
+    }
+
+    @Test
+    public void alHacerClickEnBotonVolverSeNavegaAListaDeArtistas() {
+
+        // Simula el clic en el primer elemento de la lista de artistas para navegar al detalle
+        onView(withId(R.id.artist_list)) // Se debe reemplazar con el ID real de artistas
+                .perform(actionOnItemAtPosition(0, click()));
+
+        // Asumiendo que hay un Button en la parte inferior con el ID "button_volver_artistas"
+        // y el texto "VOLVER".
+
+        // Simula el clic en el botón "VOLVER"
+        onView(withId(R.id.button_volver_artistas)) // Se debe reemplazar con el ID real del botón "Volver"
+                .perform(click());
+
+        onView(withId(R.id.artist_list)) // Se debe reemplazar con el ID real de artistas
+                .check(matches(isDisplayed()));
+    }
+
 }
