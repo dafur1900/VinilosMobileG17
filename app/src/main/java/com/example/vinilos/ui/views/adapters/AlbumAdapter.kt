@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.ui.views.adapters
+package com.example.vinilos.ui.views.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import co.vinilos.melomanos.R
-import co.vinilos.melomanos.databinding.AlbumItemBinding
-import co.vinilos.melomanos.data.models.Album
+import com.example.vinilos.R
+import com.example.vinilos.databinding.AlbumItemBinding
+import com.example.vinilos.data.models.Album
 
 class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 

@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.ui.viewmodels
+package com.example.vinilos.ui.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -6,11 +6,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import co.vinilos.melomanos.data.models.Album
-import co.vinilos.melomanos.data.models.Artist
-import co.vinilos.melomanos.data.repositories.AlbumRepository
-import co.vinilos.melomanos.data.repositories.BandRepository
-import co.vinilos.melomanos.data.repositories.MusicianRepository
+import com.example.vinilos.data.models.Album
+import com.example.vinilos.data.models.Artist
+import com.example.vinilos.data.repositories.AlbumRepository
+import com.example.vinilos.data.repositories.BandRepository
+import com.example.vinilos.data.repositories.MusicianRepository
 
 class AlbumViewModel(application: Application) : AndroidViewModel(application) {
 

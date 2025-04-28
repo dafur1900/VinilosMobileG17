@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.data.network
+package com.example.vinilos.data.network
 
 import android.content.Context
 import com.android.volley.Request
@@ -7,10 +7,10 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import co.vinilos.melomanos.data.models.Album
-import co.vinilos.melomanos.data.models.Artist
-import co.vinilos.melomanos.data.models.Comment
-import co.vinilos.melomanos.data.models.Track
+import com.example.vinilos.data.models.Album
+import com.example.vinilos.data.models.Artist
+import com.example.vinilos.data.models.Comment
+import com.example.vinilos.data.models.Track
 import org.json.JSONArray
 
 class NetworkServiceAdapter constructor(context: Context) {
