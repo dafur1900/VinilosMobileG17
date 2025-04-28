@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.ui.views
+package com.example.vinilos.ui.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.vinilos.melomanos.databinding.ArtistFragmentBinding
-import co.vinilos.melomanos.data.models.Artist
-import co.vinilos.melomanos.ui.viewmodels.ArtistViewModel
-import co.vinilos.melomanos.ui.views.adapters.ArtistAdapter
+import com.example.vinilos.databinding.ArtistFragmentBinding
+import com.example.vinilos.data.models.Artist
+import com.example.vinilos.ui.viewmodels.ArtistViewModel
+import com.example.vinilos.ui.views.adapters.ArtistAdapter
 
 class ArtistFragment : Fragment() {
     private var _binding: ArtistFragmentBinding? = null

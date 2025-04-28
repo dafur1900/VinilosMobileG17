@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.ui.views
+package com.example.vinilos.ui.views
 
 import android.content.Intent
 import android.os.Bundle
@@ -15,11 +15,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.vinilos.melomanos.R
-import co.vinilos.melomanos.databinding.AlbumFragmentBinding
-import co.vinilos.melomanos.data.models.Album
-import co.vinilos.melomanos.ui.viewmodels.AlbumViewModel
-import co.vinilos.melomanos.ui.views.adapters.AlbumAdapter
+import com.example.vinilos.R
+import com.example.vinilos.databinding.AlbumFragmentBinding
+import com.example.vinilos.data.models.Album
+import com.example.vinilos.ui.viewmodels.AlbumViewModel
+import com.example.vinilos.ui.views.adapters.AlbumAdapter
 import java.text.Normalizer
 import java.util.Locale
 

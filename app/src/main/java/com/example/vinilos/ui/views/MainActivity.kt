@@ -1,9 +1,9 @@
-package co.vinilos.melomanos.ui.views
+package com.example.vinilos.ui.views
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import co.vinilos.melomanos.R
+import com.example.vinilos.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

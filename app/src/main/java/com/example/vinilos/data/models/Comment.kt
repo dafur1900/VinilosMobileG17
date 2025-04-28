@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.data.models
+package com.example.vinilos.data.models
 
 data class Comment(
     val id:Int,

@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'co.vinilos.melomanos'
+    namespace 'com.example.vinilos'
     compileSdk 34
 
     defaultConfig {
-        applicationId "co.vinilos.melomanos"
+        applicationId "com.example.vinilos"
         minSdk 21
         targetSdk 34
         versionCode 1

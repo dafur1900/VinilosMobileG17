@@ -1,4 +1,4 @@
-package co.vinilos.melomanos
+package com.example.vinilos
 
 import org.junit.Test
 
