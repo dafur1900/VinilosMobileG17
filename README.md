@@ -31,10 +31,10 @@ Más información y documentación en la Wiki del proyecto
 4.  **Puedes iniciar la aplicación de dos maneras:**
     * **Mediante el emulador de Android Studio**:
         * Ejecuta la aplicación a través de un emulador de Android directamente desde Android Studio.
-        * Crea y selecciona el emulador deseado, y luego haz clic en el botón **Ejecutar Aplicación** (<0xF0><0x9F><0xAA><0xB6>).
+        * Crea y selecciona el emulador deseado, y luego haz clic en el botón **Ejecutar Aplicación** (id-emulador).
     * **Utilizando un dispositivo Android físico**:
         * También tienes la opción de usar un teléfono o tableta Android real como emulador, conectándolo a tu computadora.
-        * Una vez conectado, selecciónalo en Android Studio y presiona el botón **Ejecutar Aplicación** (<0xF0><0x9F><0xAA><0xB6>) para iniciar la app.
+        * Una vez conectado, selecciónalo en Android Studio y presiona el botón **Ejecutar Aplicación** (id-emulador) para iniciar la app.
         * **Nota importante**: Para poder ejecutar en un dispositivo Android, primero debes activar las opciones de desarrollador en la configuración del dispositivo.
 
 ## Ejecución de la aplicación mediante un archivo APK
