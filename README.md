@@ -19,9 +19,9 @@ Más información y documentación en la Wiki del proyecto
 
 ## Requisitos Fundamentales
 
-* Se requiere **Java versión 17**.
+* Se requiere **JetBrains Runtime 21.0.5**.
 * Es necesario **Gradle en su versión 8.7**.
-* Debes tener **Android Studio (versión Koala Feature Drop | 2024.1.2 o superior)** instalado.
+* Debes tener **Android Studio (versión Android Studio Meerkat | 2024.3.1 Patch 1 ó superior)** instalado.
 
 ## Cómo construir y ejecutar la aplicación localmente
 
@@ -58,3 +58,6 @@ Más información y documentación en la Wiki del proyecto
 5.  Haz clic derecho sobre la clase o el paquete de pruebas que deseas ejecutar. Selecciona **Run 'nombre\_de\_la\_prueba'** para ejecutar pruebas específicas, o **Run Tests in `androidTest`** para ejecutar todas las pruebas de extremo a extremo.
 6.  Android Studio mostrará una ventana con los resultados de las pruebas, donde podrás ver el progreso y el estado de cada una.
 7.  Una vez finalizada la ejecución, revisa el informe completo de las pruebas en la consola de Android Studio. Este informe te mostrará detalles de cada prueba, indicando cuáles fueron exitosas y cuáles fallaron.
+
+![image](https://github.com/user-attachments/assets/ecc4235c-bee4-4606-b0ee-4e16c5cb0718)
+
