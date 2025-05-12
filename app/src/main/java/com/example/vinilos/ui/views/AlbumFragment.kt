@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.R
+import com.example.vinilos.common.Constant
 import com.example.vinilos.databinding.AlbumFragmentBinding
 import com.example.vinilos.data.models.Album
 import com.example.vinilos.ui.viewmodels.AlbumViewModel
@@ -41,7 +42,11 @@ class AlbumFragment : Fragment() {
         _binding = AlbumFragmentBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModelAdapter = AlbumAdapter()
-
+        viewModelAdapter.setOnItemClickListener { albumId ->
+            val intent = Intent(requireContext(), AlbumDetailActivity::class.java)
+            intent.putExtra(Constant.ALBUM_ID, albumId)
+            startActivity(intent)
+        }
         ivLogout = view.findViewById(R.id.ivLogout)
         progressBar = view.findViewById(R.id.progressBar)
         recyclerView = binding.albumRv
@@ -75,21 +80,20 @@ class AlbumFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        viewModel = ViewModelProvider(this, AlbumViewModel.Factory(activity.application)).get(
-            AlbumViewModel::class.java
-        )
+        viewModel = ViewModelProvider(
+            this,
+            AlbumViewModel.Factory(activity.application)
+        )[AlbumViewModel::class.java]
 
         progressBar.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
 
-        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
-            it.apply {
-                val sortedAlbums = this.sortedBy { album -> album.name }
-                viewModelAdapter!!.albums = sortedAlbums
-                progressBar.visibility = View.GONE
-                recyclerView.visibility = View.VISIBLE
-            }
-        })
+        viewModel.albums.observe(viewLifecycleOwner) { albumList ->
+            val sortedAlbums = albumList.sortedBy { it.name }
+            viewModelAdapter.albums = sortedAlbums
+            progressBar.visibility = View.GONE
+            recyclerView.visibility = View.VISIBLE
+        }
         viewModel.eventNetworkError.observe(
             viewLifecycleOwner,
             Observer<Boolean> { isNetworkError ->
