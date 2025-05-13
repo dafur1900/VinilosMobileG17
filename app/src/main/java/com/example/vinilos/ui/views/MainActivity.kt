@@ -21,11 +21,6 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.artists -> {
-                    headerViewModel.setTitleAndAddButtonVisibility("Artistas", false)
-                    loadFragment(ArtistFragment(), userTypeValue)
-                    true
-                }
 
                 R.id.albums -> {
                     headerViewModel.setTitleAndAddButtonVisibility(
@@ -33,6 +28,12 @@ class MainActivity : AppCompatActivity() {
                         UserType.COLLECTOR.type == userTypeValue
                     )
                     loadFragment(AlbumFragment(), userTypeValue)
+                    true
+                }
+
+                R.id.artists -> {
+                    headerViewModel.setTitleAndAddButtonVisibility("Artistas", false)
+                    loadFragment(ArtistFragment(), userTypeValue)
                     true
                 }
 
