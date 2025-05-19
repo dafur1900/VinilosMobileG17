@@ -1,33 +1,42 @@
-package com.example.vinilos.ui.viewmodels
+package com.example.vinilos.ui.viewmodels // Asegúrate que el paquete sea el correcto
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.volley.VolleyError
 import com.example.vinilos.data.models.Collector
 import com.example.vinilos.data.repositories.CollectorRepository
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for managing collector data and exposing it to the UI.
+ *
+ * @param application The application context, needed for the Repository.
+ */
 class CollectorViewModel(application: Application) : AndroidViewModel(application) {
 
     private val collectorRepository = CollectorRepository(application)
 
+    // LiveData to hold the list of collectors
     private val _collectors = MutableLiveData<List<Collector>>()
     val collectors: LiveData<List<Collector>>
         get() = _collectors
 
-
+    // LiveData to represent the loading state
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-
+    // LiveData to represent an error state
     private val _error = MutableLiveData<VolleyError?>()
     val error: LiveData<VolleyError?>
         get() = _error
 
+    // LiveData for search query
     private val _searchQuery = MutableLiveData<String>("")
     val searchQuery: LiveData<String>
         get() = _searchQuery
@@ -37,7 +46,6 @@ class CollectorViewModel(application: Application) : AndroidViewModel(applicatio
         fetchCollectors(forceRefresh = false)
     }
 
-
     fun fetchCollectors(forceRefresh: Boolean = false) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -45,7 +53,7 @@ class CollectorViewModel(application: Application) : AndroidViewModel(applicatio
             try {
                 collectorRepository.getCollectors(
                     onComplete = { collectorList ->
-                        _collectors.postValue(collectorList) // Use postValue if on a background thread, though getCollectors might call back on main
+                        _collectors.postValue(collectorList)
                         _isLoading.postValue(false)
                     },
                     onError = { volleyError ->
@@ -63,6 +71,7 @@ class CollectorViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+
     fun refreshCollectorsData() {
         fetchCollectors(forceRefresh = true)
     }
@@ -72,7 +81,19 @@ class CollectorViewModel(application: Application) : AndroidViewModel(applicatio
         _searchQuery.value = query
     }
 
+
     fun onClearedError() {
         _error.value = null
+    }
+
+
+    @Suppress("UNCHECKED_CAST")
+    class Factory(private val app: Application) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(CollectorViewModel::class.java)) {
+                return CollectorViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
+        }
     }
 }

@@ -15,7 +15,7 @@
         android:id="@+id/imageViewCollectorAvatar"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/ic_avatar_placeholder" app:tint="@color/color_text"
+        android:src="@drawable/ic_collector_avatar" app:tint="@color/color_text"
         android:contentDescription="@string/artist_image" app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

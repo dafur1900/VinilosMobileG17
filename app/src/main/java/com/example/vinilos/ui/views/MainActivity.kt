@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.collectors -> {
+                    loadFragment(CollectorFragment())
                     true
                 }
 

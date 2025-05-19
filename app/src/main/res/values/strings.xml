@@ -15,4 +15,5 @@
     <string name="cover_image">Portada del álbum</string>
     <string name="artist_image">Imagen del artista</string>
     <string name="empty_albums">No se encontraron álbumes que coincidan con tu búsqueda</string>
+    <string name="collectors_search_hint">Escriba aquí para buscar</string>
 </resources>
