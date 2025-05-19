@@ -1,4 +1,4 @@
-package com.example.vinilos.ui.views // Asegúrate que el paquete sea el correcto
+package com.example.vinilos.ui.views
 
 import android.content.Intent
 import android.os.Bundle
