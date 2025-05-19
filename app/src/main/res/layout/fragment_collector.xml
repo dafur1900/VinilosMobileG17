@@ -4,29 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.views.CollectorFragment"> <com.google.android.material.appbar.AppBarLayout
+    tools:context=".ui.views.CollectorFragment">
+    <com.google.android.material.appbar.AppBarLayout
     android:id="@+id/appBarLayout_collector"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/color_primary" android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    android:background="@color/screen_background_purple" android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_collector"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:title="@string/collectors_bottom_nav"
-        app:titleTextColor="@color/color_text">
-
-        <ImageView
-            android:id="@+id/logoutIconCollector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/baseline_exit_to_app_24"
-            android:padding="16dp"
-            android:contentDescription="@string/logout"
-            app:tint="@color/color_text"
-            android:background="?attr/selectableItemBackgroundBorderless"/>
+        app:titleTextColor="@color/color_text" app:titleTextAppearance="@style/ToolbarTitleStyle"
+        app:contentInsetStart="24dp"> <ImageView
+        android:id="@+id/logoutIconCollector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@drawable/baseline_exit_to_app_24"
+        android:padding="16dp" android:contentDescription="@string/logout"
+        app:tint="@color/color_text"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
     </androidx.appcompat.widget.Toolbar>
 
 </com.google.android.material.appbar.AppBarLayout>

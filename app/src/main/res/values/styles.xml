@@ -35,4 +35,8 @@
         <item name="android:fontFamily">@font/poppins_semibold</item>
     </style>
 
+    <style name="ToolbarTitleStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/color_text</item> <item name="android:fontFamily">@font/poppins_semibold</item> </style>
+
 </resources>
