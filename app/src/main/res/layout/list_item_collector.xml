@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="12dp"
+    android:paddingHorizontal="16dp"
+    android:layout_marginBottom="8dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/imageViewCollectorAvatar"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_collector_avatar" app:tint="@color/color_text"
+        android:contentDescription="@string/artist_image" app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCollectorName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        tools:text="Nombre Completo Coleccionista"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/color_text"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/imageViewCollectorAvatar"
+        app:layout_constraintTop_toTopOf="@id/imageViewCollectorAvatar"
+        app:layout_constraintEnd_toStartOf="@id/imageViewCollectorChevron" />
+
+    <TextView
+        android:id="@+id/textViewCollectorEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="correo@ejemplo.com"
+        android:textAppearance="?attr/textAppearanceBody2"
+        android:textColor="@color/hint_text" android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/textViewCollectorName"
+        app:layout_constraintTop_toBottomOf="@id/textViewCollectorName"
+        app:layout_constraintEnd_toEndOf="@id/textViewCollectorName"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewCollectorAvatar"/>
+
+    <ImageView
+        android:id="@+id/imageViewCollectorChevron"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_keyboard_arrow_right_24" app:tint="@color/color_text"
+        android:contentDescription="@string/go_to_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

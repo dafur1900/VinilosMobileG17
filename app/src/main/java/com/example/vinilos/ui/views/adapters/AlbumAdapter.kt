@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.vinilos.R
@@ -14,9 +15,23 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
     var albums: List<Album> = emptyList()
         set(value) {
+            val diff = DiffUtil.calculateDiff(AlbumDiffCallback(field, value))
             field = value
-            notifyDataSetChanged()
+            diff.dispatchUpdatesTo(this)
         }
+
+    // Clase auxiliar para comparación
+    class AlbumDiffCallback(
+        private val oldList: List<Album>,
+        private val newList: List<Album>
+    ) : DiffUtil.Callback() {
+        override fun getOldListSize() = oldList.size
+        override fun getNewListSize() = newList.size
+        override fun areItemsTheSame(oldPos: Int, newPos: Int) =
+            oldList[oldPos].id == newList[newPos].id
+        override fun areContentsTheSame(oldPos: Int, newPos: Int) =
+            oldList[oldPos] == newList[newPos]
+    }
 
     // Inflates the item layout and returns a ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
