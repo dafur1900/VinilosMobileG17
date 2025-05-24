@@ -1,4 +1,4 @@
-package co.vinilos.melomanos
+package com.example.vinilos
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
@@ -12,7 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
-import co.vinilos.melomanos.ui.views.HomeActivity
+import com.example.vinilos.ui.views.HomeActivity
 import org.hamcrest.Matchers.allOf
 import org.junit.Rule
 import org.junit.Test
@@ -34,7 +34,7 @@ class ArtistListTest {
             click()
         )
 
-        onView(allOf(withId(R.id.artistTitle), withText("Artistas"))).check(matches(isDisplayed()))
+        onView(allOf(withId(R.id.tvTitle), withText("Artistas"))).check(matches(isDisplayed()))
     }
 
     @Test
@@ -50,7 +50,7 @@ class ArtistListTest {
             click()
         )
 
-        onView(allOf(withId(R.id.artistTitle), withText("Artistas"))).check(matches(isDisplayed()))
+        onView(allOf(withId(R.id.tvTitle), withText("Artistas"))).check(matches(isDisplayed()))
         onView(withId(R.id.artistRv))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
             .check(matches(hasDescendant(allOf(withId(R.id.frameArtist), isDisplayed()))))
@@ -73,7 +73,7 @@ class ArtistListTest {
             click()
         )
 
-        onView(allOf(withId(R.id.artistTitle), withText("Artistas"))).check(matches(isDisplayed()))
+        onView(allOf(withId(R.id.tvTitle), withText("Artistas"))).check(matches(isDisplayed()))
         onView(withId(R.id.artistRv))
             .perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(0))
             .check(matches(hasDescendant(allOf(withId(R.id.frameArtist), isDisplayed()))))

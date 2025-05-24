@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.data.network
+package com.example.vinilos.data.network
 
 import android.content.Context
 import com.android.volley.Request
@@ -7,11 +7,13 @@ import com.android.volley.Response
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import co.vinilos.melomanos.data.models.Album
-import co.vinilos.melomanos.data.models.Artist
-import co.vinilos.melomanos.data.models.Comment
-import co.vinilos.melomanos.data.models.Track
+import com.example.vinilos.data.models.Album
+import com.example.vinilos.data.models.Artist
+import com.example.vinilos.data.models.Comment
+import com.example.vinilos.data.models.Track
+import com.example.vinilos.data.models.Collector
 import org.json.JSONArray
+import org.json.JSONObject
 
 class NetworkServiceAdapter constructor(context: Context) {
     companion object {
@@ -170,6 +172,125 @@ class NetworkServiceAdapter constructor(context: Context) {
                 },
                 {
                     onError(it)
+                })
+        )
+    }
+
+    fun getCollectors(onComplete: (resp: List<Collector>) -> Unit, onError: (error: VolleyError) -> Unit) {
+        requestQueue.add(
+            getRequest("collectors",
+                { response ->
+                    try {
+                        val respJsonArray = JSONArray(response)
+                        val list = mutableListOf<Collector>()
+                        for (i in 0 until respJsonArray.length()) {
+                            val item: JSONObject = respJsonArray.getJSONObject(i)
+
+                            // Parsear Comments
+                            val commentsArray = item.optJSONArray("comments") ?: JSONArray()
+                            val commentsList = mutableListOf<Comment>()
+                            for (j in 0 until commentsArray.length()) {
+                                val commentItem = commentsArray.getJSONObject(j)
+                                commentsList.add(
+                                    Comment(
+                                        id = commentItem.getInt("id"),
+                                        description = commentItem.getString("description"),
+                                        rating = commentItem.getInt("rating")
+                                    )
+                                )
+                            }
+
+
+                            val favoritePerformersArray = item.optJSONArray("favoritePerformers") ?: JSONArray()
+                            val favoritePerformersList = mutableListOf<Artist>()
+                            for (j in 0 until favoritePerformersArray.length()) {
+                                val performerItem = favoritePerformersArray.getJSONObject(j)
+                                favoritePerformersList.add(
+                                    Artist(
+                                        id = performerItem.getInt("id"),
+                                        name = performerItem.getString("name"),
+                                        image = performerItem.optString("image"),
+                                        description = performerItem.optString("description"),
+
+
+                                        creationDate = performerItem.optString("creationDate", performerItem.optString("birthDate","")),
+                                        albums = emptyList(), // Para evitar complejidad/recursión aquí
+                                        type = if (performerItem.has("birthDate")) Artist.ArtistType.MUSICIAN else Artist.ArtistType.BAND // Intento de inferir tipo
+                                    )
+                                )
+                            }
+
+
+                            val collectorAlbumsArray = item.optJSONArray("collectorAlbums") ?: JSONArray()
+                            val collectorAlbumsList = mutableListOf<Album>()
+                            for (j in 0 until collectorAlbumsArray.length()) {
+                                val albumItem = collectorAlbumsArray.getJSONObject(j)
+
+                                val tracksArray = albumItem.optJSONArray("tracks") ?: JSONArray()
+                                val tracks = mutableListOf<Track>()
+                                for (k in 0 until tracksArray.length()) {
+                                    val trackItem = tracksArray.getJSONObject(k)
+                                    tracks.add(Track(trackItem.getInt("id"), trackItem.getString("name"), trackItem.getString("duration")))
+                                }
+
+                                val albumPerformersArray = albumItem.optJSONArray("performers") ?: JSONArray()
+                                val albumPerformers = mutableListOf<Artist>()
+                                for (k in 0 until albumPerformersArray.length()) {
+                                    val performerItem = albumPerformersArray.getJSONObject(k)
+                                    albumPerformers.add(Artist(
+                                        id = performerItem.getInt("id"),
+                                        name = performerItem.getString("name"),
+                                        image = performerItem.optString("image"),
+                                        description = performerItem.optString("description"),
+                                        creationDate = performerItem.optString("creationDate", performerItem.optString("birthDate","")),
+                                        albums = emptyList(),
+                                        type = if (performerItem.has("birthDate")) Artist.ArtistType.MUSICIAN else Artist.ArtistType.BAND
+                                    ))
+                                }
+                                val albumCommentsArray = albumItem.optJSONArray("comments") ?: JSONArray()
+                                val albumComments = mutableListOf<Comment>()
+                                for (k in 0 until albumCommentsArray.length()) {
+                                    val commentItem = albumCommentsArray.getJSONObject(k)
+                                    albumComments.add(Comment(commentItem.getInt("id"), commentItem.getString("description"), commentItem.getInt("rating")))
+                                }
+
+
+                                collectorAlbumsList.add(
+                                    Album(
+                                        id = albumItem.getInt("id"),
+                                        name = albumItem.getString("name"),
+                                        cover = albumItem.getString("cover"),
+                                        description = albumItem.optString("description"),
+                                        releaseDate = albumItem.optString("releaseDate"),
+                                        genre = albumItem.optString("genre"),
+                                        recordLabel = albumItem.optString("recordLabel"),
+                                        tracks = tracks, // Lista de tracks parseada arriba
+                                        performers = albumPerformers, // Lista de performers parseada arriba
+                                        comments = albumComments // Lista de comments parseada arriba
+                                    )
+                                )
+                            }
+
+                            list.add(
+                                Collector(
+                                    id = item.getInt("id"),
+                                    name = item.getString("name"),
+                                    telephone = item.getString("telephone"),
+                                    email = item.getString("email"),
+                                    comments = commentsList,
+                                    favoritePerformers = favoritePerformersList,
+                                    collectorAlbums = collectorAlbumsList
+                                    // avatarUrl fue removido del modelo Collector
+                                )
+                            )
+                        }
+                        onComplete(list)
+                    } catch (e: Exception) {
+                        onError(VolleyError("Error parsing collectors data: ${e.message}"))
+                    }
+                },
+                { error ->
+                    onError(error)
                 })
         )
     }

@@ -1,10 +1,12 @@
-package co.vinilos.melomanos.ui.views
+package com.example.vinilos.ui.views
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import co.vinilos.melomanos.R
+import com.example.vinilos.R
+import com.example.vinilos.common.Constant
+import com.example.vinilos.common.UserType
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,13 +17,15 @@ class HomeActivity : AppCompatActivity() {
         val visitorButton = findViewById<Button>(R.id.visitorButton)
         val collectorButton = findViewById<Button>(R.id.collectorButton)
 
-        val intent = Intent(this, MainActivity::class.java)
-
         visitorButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(Constant.USER_TYPE, UserType.VISITOR.type)
             startActivity(intent)
         }
 
         collectorButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra(Constant.USER_TYPE, UserType.COLLECTOR.type)
             startActivity(intent)
         }
 

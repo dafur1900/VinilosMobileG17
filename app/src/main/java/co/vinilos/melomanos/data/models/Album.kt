@@ -1,6 +1,4 @@
-package co.vinilos.melomanos.data.models
-
-import co.vinilos.melomanos.data.models.Artist.ArtistType
+package com.example.vinilos.data.models
 
 data class Album(
     val id: Int,
@@ -10,7 +8,7 @@ data class Album(
     val releaseDate: String,
     val genre: String,
     val recordLabel: String,
-    val tracks:List<Track>,
-    val performers:List<Artist>,
-    val comments:List<Comment>,
+    val tracks: List<Track>,
+    val performers: List<Artist>,
+    val comments: List<Comment>,
 )

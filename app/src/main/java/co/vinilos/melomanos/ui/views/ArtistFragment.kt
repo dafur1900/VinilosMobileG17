@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.ui.views
+package com.example.vinilos.ui.views
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import co.vinilos.melomanos.databinding.ArtistFragmentBinding
-import co.vinilos.melomanos.data.models.Artist
-import co.vinilos.melomanos.ui.viewmodels.ArtistViewModel
-import co.vinilos.melomanos.ui.views.adapters.ArtistAdapter
+import com.example.vinilos.databinding.ArtistFragmentBinding
+import com.example.vinilos.ui.viewmodels.ArtistViewModel
+import com.example.vinilos.ui.views.adapters.ArtistAdapter
 
 class ArtistFragment : Fragment() {
     private var _binding: ArtistFragmentBinding? = null
@@ -59,16 +57,16 @@ class ArtistFragment : Fragment() {
         viewModel = ViewModelProvider(this, ArtistViewModel.Factory(activity.application)).get(
             ArtistViewModel::class.java
         )
-        viewModel.artists.observe(viewLifecycleOwner, Observer<List<Artist>> {
+        viewModel.artists.observe(viewLifecycleOwner) {
             it.apply {
                 viewModelAdapter!!.artists = this
             }
-        })
+        }
         viewModel.eventNetworkError.observe(
-            viewLifecycleOwner,
-            Observer<Boolean> { isNetworkError ->
-                if (isNetworkError) onNetworkError()
-            })
+            viewLifecycleOwner
+        ) { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        }
     }
 
     override fun onDestroyView() {
