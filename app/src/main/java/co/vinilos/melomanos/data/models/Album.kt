@@ -1,7 +1,6 @@
-package co.vinilos.melomanos.models
+package co.vinilos.melomanos.data.models
 
-import co.vinilos.melomanos.data.models.Comment
-import co.vinilos.melomanos.data.models.Track
+import co.vinilos.melomanos.data.models.Artist.ArtistType
 
 data class Album(
     val id: Int,

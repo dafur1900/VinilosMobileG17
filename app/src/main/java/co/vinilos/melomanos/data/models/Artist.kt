@@ -1,4 +1,4 @@
-package co.vinilos.melomanos.models
+package co.vinilos.melomanos.data.models
 
 data class Artist(
     val id: Int,

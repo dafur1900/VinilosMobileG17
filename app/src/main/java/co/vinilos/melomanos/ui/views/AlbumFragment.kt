@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.vinilos.melomanos.R
 import co.vinilos.melomanos.databinding.AlbumFragmentBinding
-import co.vinilos.melomanos.models.Album
+import co.vinilos.melomanos.data.models.Album
 import co.vinilos.melomanos.ui.viewmodels.AlbumViewModel
 import co.vinilos.melomanos.ui.views.adapters.AlbumAdapter
 import java.text.Normalizer
