@@ -19,6 +19,15 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../Llave/vinilos.keystore")
+            storePassword = "vinilos123"
+            keyAlias = "vinilos"
+            keyPassword = "vinilos123"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -26,6 +35,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 
