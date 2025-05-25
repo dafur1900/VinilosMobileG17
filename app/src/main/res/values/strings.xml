@@ -11,6 +11,7 @@
     <string name="collectors_bottom_nav">Coleccionistas</string>
     <string name="add_album">Crear álbum</string>
     <string name="back_album">Ir a listado de álbumes</string>
+    <string name="back_artist">Ir a listado de artistas</string>
     <string name="logout">Cerrar session</string>
     <string name="hitn_search_field">Buscar</string>
     <string name="go_to_detail">Ir al detalle</string>
@@ -30,4 +31,14 @@
         <item>5</item>
     </string-array>
     <string name="char_counter_format">%1$d/%2$d</string>
+    <string name="success_title">¡Perfecto!</string>
+    <string name="error_title">Hubo un problema</string>
+    <string name="button_dialog">ACEPTAR</string>
+    <string name="comment_error">No debes dejar vacío el campo de comentario.</string>
+    <string name="score_error">Debes seleccionar una calificación de para el álbum.</string>
+    <string name="success_comment">Tu comentario se ha publicado exitosamente.</string>
+    <string name="type_collector">collector</string>
+    <string name="cover_image_collector">Logo del coleccionista</string>
+    <string name="empty_collectors">No se encontraron coleccionistas que coincidan con tu búsqueda</string>
+    <string name="char_counter_default">0/500</string>
 </resources>
