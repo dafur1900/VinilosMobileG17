@@ -1,24 +1,19 @@
-package com.example.vinilos.ui.views.adapters
+package com.example.vinilos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.example.vinilos.R
-import com.example.vinilos.databinding.AlbumItemBinding
 import com.example.vinilos.data.models.Album
+import com.example.vinilos.databinding.AlbumItemBinding
 
-class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
+class AlbumAdapter : ListAdapter<Album, AlbumAdapter.AlbumViewHolder>(AlbumDiffCallback) {
 
-    var albums: List<Album> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    // Inflates the item layout and returns a ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -30,19 +25,24 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.viewDataBinding.also {
-            it.album = albums[position]
-        }
+        val album = getItem(position)
+        holder.viewDataBinding.album = album
 
         Glide.with(holder.itemView.context)
-            .load(holder.viewDataBinding.album?.cover)
+            .load(album.cover)
             .placeholder(R.drawable.album_placeholder)
             .error(R.drawable.album_placeholder)
             .into(holder.viewDataBinding.ivAlbumCover)
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it1 -> it1(album.id) }
+        }
     }
 
-    override fun getItemCount(): Int {
-        return albums.size
+    private var onItemClickListener: ((Int) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Int) -> Unit) {
+        onItemClickListener = listener
     }
 
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
@@ -50,6 +50,18 @@ class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_item
+        }
+    }
+
+    companion object {
+        val AlbumDiffCallback = object : DiffUtil.ItemCallback<Album>() {
+            override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 

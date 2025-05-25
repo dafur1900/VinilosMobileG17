@@ -6,30 +6,6 @@
     android:layout_height="match_parent"
     android:padding="20dp">
 
-    <TextView
-        android:id="@+id/artistTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_semibold"
-        android:paddingStart="8dp"
-        android:paddingTop="20dp"
-        android:text="@string/artists_bottom_nav"
-        android:textColor="@color/color_text"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="RtlSymmetry" />
-
-    <ImageView
-        android:id="@+id/ivLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/logout"
-        android:paddingTop="20dp"
-        android:src="@drawable/baseline_exit_to_app_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/layoutArtistButtons"
         android:layout_width="0dp"
@@ -38,7 +14,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ivLogout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/musiciansButton"

@@ -1,24 +1,20 @@
-package com.example.vinilos.ui.views.adapters
+package com.example.vinilos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.vinilos.R
-import com.example.vinilos.databinding.ArtistItemBinding
 import com.example.vinilos.data.models.Artist
+import com.example.vinilos.databinding.ArtistItemBinding
 
-class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
+class ArtistAdapter(private val onClick: (Artist) -> Unit) :
+    ListAdapter<Artist, ArtistAdapter.ArtistViewHolder>(ArtistDiffCallback) {
 
-    var artists: List<Artist> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    // Inflates the item layout and returns a ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
         val withDataBinding: ArtistItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -30,19 +26,18 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
-        holder.viewDataBinding.also {
-            it.artist = artists[position]
-        }
+        val artist = getItem(position)
+        holder.viewDataBinding.artist = artist
 
         Glide.with(holder.itemView.context)
-            .load(holder.viewDataBinding.artist?.image)
+            .load(artist.image)
             .placeholder(R.drawable.album_placeholder)
             .error(R.drawable.album_placeholder)
             .into(holder.viewDataBinding.ivArtistImage)
-    }
 
-    override fun getItemCount(): Int {
-        return artists.size
+        holder.itemView.setOnClickListener {
+            onClick(artist)
+        }
     }
 
     class ArtistViewHolder(val viewDataBinding: ArtistItemBinding) :
@@ -53,5 +48,15 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
         }
     }
 
+    companion object {
+        val ArtistDiffCallback = object : DiffUtil.ItemCallback<Artist>() {
+            override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
+                return oldItem.id == newItem.id
+            }
 
+            override fun areContentsTheSame(oldItem: Artist, newItem: Artist): Boolean {
+                return oldItem == newItem
+            }
+        }
+    }
 }

@@ -12,18 +12,18 @@
         <item name="android:background">@drawable/button_style</item>
         <item name="android:textColor">@color/color_primary</item>
         <item name="android:backgroundTint">@color/color_text</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
     </style>
 
     <style name="BottomNavigationActiveText" parent="TextAppearance.AppCompat">
         <item name="fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="BottomNavigationInactiveText" parent="TextAppearance.AppCompat">
         <item name="fontFamily">@font/poppins_medium</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="ArtistButtonStyle">
@@ -33,6 +33,20 @@
         <item name="android:background">@drawable/artist_button_background_selector</item>
         <item name="android:textColor">@color/color_text</item>
         <item name="android:fontFamily">@font/poppins_semibold</item>
+    </style>
+
+    <style name="ToolbarTitleStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/color_text</item> <item name="android:fontFamily">@font/poppins_semibold</item> </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textColorHint">@color/hint_text</item>
+        <item name="android:editTextColor">@color/color_primary</item>
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="android:textCursorDrawable">@color/color_primary</item>
+        <item name="colorControlNormal">@color/color_primary</item>
+        <item name="colorControlActivated">@color/color_primary</item>
     </style>
 
 </resources>
