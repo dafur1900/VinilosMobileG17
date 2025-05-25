@@ -12,16 +12,13 @@ import com.example.vinilos.databinding.ArtistAlbumDetailItemBinding
 
 class PerformerAdapter : ListAdapter<Artist, PerformerAdapter.PerformerViewHolder>(PerformerDiffCallback) {
 
-    // Para compatibilidad con código que no usa ListAdapter directamente
-    override fun submitList(list: List<Artist>?) {
-        super.submitList(list)
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PerformerViewHolder {
-        val binding = ArtistAlbumDetailItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+        return PerformerViewHolder(
+            ArtistAlbumDetailItemBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
-        return PerformerViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: PerformerViewHolder, position: Int) {
@@ -37,11 +34,13 @@ class PerformerAdapter : ListAdapter<Artist, PerformerAdapter.PerformerViewHolde
                 .placeholder(R.drawable.album_placeholder)
                 .error(R.drawable.album_placeholder)
                 .into(binding.ivArtistImage)
+            binding.executePendingBindings()
+
         }
     }
     
     companion object {
-        val PerformerDiffCallback = object : DiffUtil.ItemCallback<Artist>() {
+        private val PerformerDiffCallback = object : DiffUtil.ItemCallback<Artist>() {
             override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
                 return oldItem.id == newItem.id
             }

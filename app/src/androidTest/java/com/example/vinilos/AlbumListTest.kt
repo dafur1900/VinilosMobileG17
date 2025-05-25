@@ -73,6 +73,9 @@ class AlbumListTest {
         )
         appCompatEditText4.perform(closeSoftKeyboard())
 
+
+        Thread.sleep(3000)
+
         val linearLayout = onView(
             allOf(
                 withParent(

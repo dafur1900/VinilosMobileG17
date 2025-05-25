@@ -2,8 +2,7 @@ package com.example.vinilos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,40 +15,44 @@ class ArtistAdapter(private val onClick: (Artist) -> Unit) :
     ListAdapter<Artist, ArtistAdapter.ArtistViewHolder>(ArtistDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArtistViewHolder {
-        val withDataBinding: ArtistItemBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context),
-            ArtistViewHolder.LAYOUT,
-            parent,
-            false
+        return ArtistViewHolder(
+            ArtistItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-        return ArtistViewHolder(withDataBinding)
+
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
         val artist = getItem(position)
-        holder.viewDataBinding.artist = artist
-
-        Glide.with(holder.itemView.context)
-            .load(artist.image)
-            .placeholder(R.drawable.album_placeholder)
-            .error(R.drawable.album_placeholder)
-            .into(holder.viewDataBinding.ivArtistImage)
-
-        holder.itemView.setOnClickListener {
-            onClick(artist)
-        }
+        holder.bind(artist, onClick)
     }
 
-    class ArtistViewHolder(val viewDataBinding: ArtistItemBinding) :
-        RecyclerView.ViewHolder(viewDataBinding.root) {
-        companion object {
-            @LayoutRes
-            val LAYOUT = R.layout.artist_item
+    class ArtistViewHolder(private val binding: ArtistItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(artist: Artist, onClick: (Artist) -> Unit) {
+            binding.artist = artist
+
+            Glide.with(binding.root.context)
+                .load(artist.image)
+                .placeholder(R.drawable.album_placeholder)
+                .error(R.drawable.album_placeholder)
+                .into(binding.ivArtistImage)
+
+            binding.root.setOnClickListener {
+                onClick(artist)
+            }
+
+            binding.executePendingBindings()
+
         }
     }
 
     companion object {
-        val ArtistDiffCallback = object : DiffUtil.ItemCallback<Artist>() {
+        private val ArtistDiffCallback = object : DiffUtil.ItemCallback<Artist>() {
+
             override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
                 return oldItem.id == newItem.id
             }
