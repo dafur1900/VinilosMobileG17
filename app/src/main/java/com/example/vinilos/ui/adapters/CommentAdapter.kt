@@ -14,40 +14,42 @@ import com.example.vinilos.databinding.CommentItemBinding
 class CommentAdapter : ListAdapter<Comment, CommentAdapter.CommentViewHolder>(CommentDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
-        val binding = CommentItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false
+        return CommentViewHolder(
+            CommentItemBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
         )
-        return CommentViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        val comment = getItem(position)
-        holder.bind(comment)
+        holder.bind(getItem(position))
     }
 
-    class CommentViewHolder(private val viewDataBinding: CommentItemBinding) :
-        RecyclerView.ViewHolder(viewDataBinding.root) {
+    class CommentViewHolder(private val binding: CommentItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(comment: Comment) {
-            viewDataBinding.comment = comment
+            binding.comment = comment
 
-            val starsContainer = viewDataBinding.stars
-
+            val starsContainer = binding.stars
             starsContainer.removeAllViews()
 
             for (i in 1..5) {
-                val star = ImageView(starsContainer.context)
-                val starDrawable = if (i <= comment.rating) R.drawable.baseline_star_rate_24 else R.drawable.baseline_star_outline_24
-                star.setImageResource(starDrawable)
-                star.layoutParams = LinearLayout.LayoutParams(48, 48)
+                val star = ImageView(starsContainer.context).apply {
+                    setImageResource(
+                        if (i <= comment.rating) R.drawable.baseline_star_rate_24
+                        else R.drawable.baseline_star_outline_24
+                    )
+                    layoutParams = LinearLayout.LayoutParams(48, 48)
+                }
                 starsContainer.addView(star)
             }
 
-            viewDataBinding.executePendingBindings()
+            binding.executePendingBindings()
         }
     }
 
     companion object {
-        val CommentDiffCallback = object : DiffUtil.ItemCallback<Comment>() {
+        private val CommentDiffCallback = object : DiffUtil.ItemCallback<Comment>() {
             override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
                 return oldItem.id == newItem.id
             }

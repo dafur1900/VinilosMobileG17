@@ -1,0 +1,17 @@
+The following is a list of opportunities to improve the accessibility of Vinilos. Each item corresponds to an outlined area on the attached screenshot.
+
+Image contrast
+com.example.vinilos:id/search_mag_icon
+Consider increasing the contrast ratio between this image's foreground and background.
+The image's contrast ratio is 2.39. This ratio is based on an estimated foreground color of #A0A9B0 and an estimated background color of #FFFFFF. Consider increasing this ratio to 3.00 or greater.
+
+Touch target
+com.example.vinilos:id/search_close_btn
+Consider making this clickable item larger.
+This item's width is 40dp. Consider making the width of this touch target 48dp or larger. A TouchDelegate has been detected on one of this item's ancestors. This message can be ignored if the delegate is of sufficient size and handles touches for this item.
+
+Text Scaling
+com.example.vinilos:id/search_src_text
+This TextView has a fixed height and scalable text.
+Consider modifying the LayoutParams to allow for text expansion.
+

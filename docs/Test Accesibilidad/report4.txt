@@ -1,0 +1,7 @@
+The following is a list of opportunities to improve the accessibility of Vinilos. Each item corresponds to an outlined area on the attached screenshot.
+
+Touch target
+com.example.vinilos:id/btnArtistDetailBack
+Consider making this clickable item larger.
+This item's size is 24dp x 24dp. Consider making this touch target 48dp wide and 48dp high or larger.
+

@@ -3,7 +3,6 @@ package com.example.vinilos
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
@@ -11,6 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withClassName
+import androidx.test.espresso.matcher.ViewMatchers.withContentDescription
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
@@ -24,26 +24,22 @@ import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.`is`
 import org.hamcrest.TypeSafeMatcher
 import org.hamcrest.core.IsInstanceOf
-import org.junit.After
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class AlbumDetailListTest {
+class ArtistDetailTest {
 
     @Rule
     @JvmField
     var mActivityScenarioRule = ActivityScenarioRule(HomeActivity::class.java)
 
     @Test
-    fun albumDetailActivityTest() {
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(3000)
+    fun artistDetailTest() {
+        // Esperar a que la aplicación cargue inicialmente
+        Thread.sleep(700)
 
         val appCompatButton = onView(
             allOf(
@@ -63,63 +59,58 @@ class AlbumDetailListTest {
         )
         appCompatButton.perform(click())
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(3000)
+        // Esperar a que se cargue la navegación
+        Thread.sleep(700)
 
+        val bottomNavigationItemView = onView(
+            allOf(
+                withId(R.id.artists), withContentDescription("Artistas"),
+                childAtPosition(
+                    childAtPosition(
+                        withId(R.id.bottomNavigationView),
+                        0
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        bottomNavigationItemView.perform(click())
+
+        // Esperar a que se carguen los artistas
+        Thread.sleep(2000)
+
+        // Intentar hacer clic en el primer artista de la lista
         val recyclerView = onView(
             allOf(
-                withId(R.id.albumRv),
-                childAtPosition(
-                    withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                    3
-                )
+                withId(R.id.artistRv),
+                isDisplayed()
             )
         )
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
-        // Added a sleep statement to match the app's execution delay.
-        // The recommended way to handle such scenarios is to use Espresso idling resources:
-        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
-        Thread.sleep(3000)
+        // Esperar a que se carguen los detalles
+        Thread.sleep(1000)
 
+        // Verificar que estamos en la vista de detalles
         val textView = onView(
             allOf(
-                withId(R.id.tvAlbumDetailTitle), withText("A Day at the Races"),
+                withId(R.id.tvAlbumDetailTitle), withText("Rubén Blades Bellido de Luna"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.widget.ScrollView::class.java))),
                 isDisplayed()
             )
         )
         textView.check(matches(isDisplayed()))
 
-        val textView2 = onView(
+        // Verificar sección de álbumes
+        val albumesTextView = onView(
             allOf(
-                withId(R.id.tvArtistName), withText("Queen"),
-                withParent(withParent(withId(R.id.rvArtistList))),
-                isDisplayed()
-            )
-        )
-        textView2.check(matches(isDisplayed()))
-
-        val textView3 = onView(
-            allOf(
-                withId(R.id.tvAlbumDetailDescription),
-                withText("El álbum fue grabado en los Estudios Sarm West, The Manor and Wessex en Inglaterra y con el ingeniero Mike Stone. El título del álbum es una referencia directa al anterior, A Night at the Opera. Ambos álbumes están titulados como películas de los hermanos Marx."),
+                withId(R.id.tvAlbumes), withText("Álbumes"),
                 withParent(withParent(IsInstanceOf.instanceOf(android.widget.ScrollView::class.java))),
                 isDisplayed()
             )
         )
-        textView3.check(matches(isDisplayed()))
-
-        val textView4 = onView(
-            allOf(
-                withId(R.id.tvComments), withText("Comentarios"),
-                withParent(withParent(IsInstanceOf.instanceOf(android.widget.ScrollView::class.java))),
-                isDisplayed()
-            )
-        )
-        textView4.check(matches(withText("Comentarios")))
+        albumesTextView.check(matches(withText("Álbumes")))
     }
 
     private fun childAtPosition(
