@@ -2,6 +2,7 @@ package com.example.vinilos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ class ArtistAdapter(private val onClick: (Artist) -> Unit) :
                 false
             )
         )
+
     }
 
     override fun onBindViewHolder(holder: ArtistViewHolder, position: Int) {
@@ -44,11 +46,13 @@ class ArtistAdapter(private val onClick: (Artist) -> Unit) :
             }
 
             binding.executePendingBindings()
+
         }
     }
 
     companion object {
         private val ArtistDiffCallback = object : DiffUtil.ItemCallback<Artist>() {
+
             override fun areItemsTheSame(oldItem: Artist, newItem: Artist): Boolean {
                 return oldItem.id == newItem.id
             }

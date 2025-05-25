@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
 import com.example.vinilos.data.models.Collector
 import com.example.vinilos.databinding.ListItemCollectorBinding
 
@@ -39,6 +40,7 @@ class CollectorAdapter(private val onCollectorClick: (Collector) -> Unit) :
 
     companion object {
         private val CollectorDiffCallback = object : DiffUtil.ItemCallback<Collector>() {
+
             override fun areItemsTheSame(oldItem: Collector, newItem: Collector): Boolean {
                 return oldItem.id == newItem.id
             }

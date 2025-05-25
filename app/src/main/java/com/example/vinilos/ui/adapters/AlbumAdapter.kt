@@ -2,15 +2,18 @@ package com.example.vinilos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+
 import com.bumptech.glide.Glide
 import com.example.vinilos.R
 import com.example.vinilos.data.models.Album
 import com.example.vinilos.databinding.AlbumItemBinding
 
 class AlbumAdapter : ListAdapter<Album, AlbumAdapter.AlbumViewHolder>(AlbumDiffCallback) {
+
 
     private var onItemClickListener: ((Int) -> Unit)? = null
 
@@ -26,6 +29,7 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.AlbumViewHolder>(AlbumDiffC
                 false
             )
         )
+
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
@@ -49,11 +53,14 @@ class AlbumAdapter : ListAdapter<Album, AlbumAdapter.AlbumViewHolder>(AlbumDiffC
             }
 
             binding.executePendingBindings()
+
         }
     }
 
     companion object {
+
         private val AlbumDiffCallback = object : DiffUtil.ItemCallback<Album>() {
+
             override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
                 return oldItem.id == newItem.id
             }

@@ -18,6 +18,7 @@ class PerformerAdapter : ListAdapter<Artist, PerformerAdapter.PerformerViewHolde
                 LayoutInflater.from(parent.context), parent, false
             )
         )
+
     }
 
     override fun onBindViewHolder(holder: PerformerViewHolder, position: Int) {
@@ -34,6 +35,7 @@ class PerformerAdapter : ListAdapter<Artist, PerformerAdapter.PerformerViewHolde
                 .error(R.drawable.album_placeholder)
                 .into(binding.ivArtistImage)
             binding.executePendingBindings()
+
         }
     }
     

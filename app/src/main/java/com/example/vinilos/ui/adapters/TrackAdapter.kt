@@ -2,8 +2,10 @@ package com.example.vinilos.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vinilos.data.models.Track
 import com.example.vinilos.databinding.TrackAlbumDetailItemBinding
@@ -21,6 +23,7 @@ class TrackAdapter : ListAdapter<Track, TrackAdapter.TrackViewHolder>(TrackDiffC
     override fun onBindViewHolder(holder: TrackViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
+
 
     class TrackViewHolder(private val binding: TrackAlbumDetailItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
