@@ -28,6 +28,13 @@
         <activity
             android:name=".ui.views.AlbumDetailActivity"
             android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".ui.views.CollectorDetailActivity"
+            android:windowSoftInputMode="adjustPan"/>
+
+        <activity
+            android:name=".ui.views.ArtistDetailActivity"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>
